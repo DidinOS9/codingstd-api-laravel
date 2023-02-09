@@ -18,4 +18,12 @@ class PorductController extends Controller
             'message' => 'success create data'
         ]);
     }
+
+    public function getData($id)
+    {
+        $products = Product::findOrFail($id);
+        return response()->json([
+            'products' => $products
+        ]);
+    }
 }
