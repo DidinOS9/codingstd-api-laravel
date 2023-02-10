@@ -40,4 +40,17 @@ class PorductController extends Controller
             'productSearch' => $products
         ]);
     }
+
+    public function updateData(Request $request, $id)
+    {
+        Product::findOrFail($id)->update([
+            'name' => $request->product_name,
+            'price' => $request->price,
+            'desc' => $request->desc
+        ]);
+
+        return response()->json([
+            'messsage' => 'success update data'
+        ]);
+    }
 }

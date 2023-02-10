@@ -22,3 +22,4 @@ Route::post('/create-product', 'PorductController@createData');
 Route::get('/get-all-product', 'PorductController@getAllData');
 Route::get('/get-product/{id}', 'PorductController@getData');
 Route::get('/search-product', 'PorductController@searchData');
+Route::patch('/update-product/{id}', 'PorductController@updateData');
