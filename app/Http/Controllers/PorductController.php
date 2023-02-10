@@ -19,11 +19,25 @@ class PorductController extends Controller
         ]);
     }
 
-    public function getData($id)
+    public function getAllData()
     {
-        $products = Product::findOrFail($id);
+        $products = Product::all();
         return response()->json([
             'products' => $products
+        ]);
+    }
+
+    public function getData($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+
+    public function searchData(Request $request)
+    {
+        $products = Product::where('name', 'LIKE', '%'.$request->product_name.'%')->get();
+        return response()->json([
+            'productSearch' => $products
         ]);
     }
 }
