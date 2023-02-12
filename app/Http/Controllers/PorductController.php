@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PorductController extends Controller
 {
     public function createData(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required',
+            'price' => 'required|numeric',
+            'desc' => 'required|max: 255'       
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ]);
+        }
+
         Product::create([
             'name' => $request->product_name,
             'price' => $request->price,
@@ -43,6 +56,18 @@ class PorductController extends Controller
 
     public function updateData(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required',
+            'price' => 'required|numeric',
+            'desc' => 'required|max:255'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ]);
+        }
+
         Product::findOrFail($id)->update([
             'name' => $request->product_name,
             'price' => $request->price,
