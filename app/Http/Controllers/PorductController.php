@@ -78,4 +78,12 @@ class PorductController extends Controller
             'messsage' => 'success update data'
         ]);
     }
+
+    public function deleteData($id)
+    {
+        Product::destroy($id);
+        return response()->json([
+            'message' => 'success delete data'
+        ]);
+    }
 }
